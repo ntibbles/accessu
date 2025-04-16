@@ -1,0 +1,13 @@
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    padding: 5px;
+    text-align: center;
+    min-width: 14em;
+}
+
+input[type="checkbox"] {
+    accent-color: #AB1B18;
+    margin: 10px 0 5px;
+}
