@@ -18,7 +18,7 @@ async function init() {
         setState(tabId, evt, evt.target.id);
         loadScript(tabId, evt);
     });
-    restoreCb();
+    restoreCb(tabId);
 }
 
 // inject the script into the current tab
@@ -31,20 +31,20 @@ function loadScript(tabId, evt) {
 }
 
 // set the checkbox state for the tab
-function setState(tabId, event, id) {
+function setState(tabId, event) {
     const store = {};
     chrome.storage.sync.get(store[tabId]).then(() => {
-        const store = {};
         const isChecked = event.target.checked;
-        store[id] = {isChecked, tabId};
+        store[tabId] = {isChecked};
         chrome.storage.sync.set( store );
     })
 }
 
 // restore the checkbox state
-function restoreCb() {
-    chrome.storage.sync.get().then(result => {
+function restoreCb(tabId) {
+    const store = {};
+    chrome.storage.sync.get(store[tabId]).then(result => {
         const cb = document.getElementById('targetSize');
-        cb.checked = result.targetSize.isChecked;
+        cb.checked = result[tabId]?.isChecked;
     });
 }
